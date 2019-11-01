@@ -1,0 +1,27 @@
+// É o endereço na barra de endereços quando abre-se a planilha
+var ss = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/AAAAAAAAAAAAAAAAAAAAAAAAAAA/");
+
+var sheet = ss.getSheetByName('cadastro');
+
+
+function doPost(e){
+    var action = e.parameter.action;
+
+    if(action == 'adicionar'){
+    return adicionar(e);
+
+    }
+}
+
+
+function adicionar(e){
+
+    var nome = e.parameter.nome;
+
+    var codigo = e.parameter.codigo;
+
+    sheet.appendRow([codigo, nome]);
+
+    return ContentService.createTextOutput("sucesso").setMimeType(ContentService.MimeType.TEXT);
+
+}
